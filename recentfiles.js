@@ -40,7 +40,8 @@ define(function(require, exports, module) {
     
                 var state = settings.getJson("state/recentfiles") || [];
                 for (var i = state.length - 1; i >= 0; i--) {
-                    add(state[i]);
+                    if (state[i])
+                        add(state[i]);
                 }
             }, plugin);
     
@@ -49,7 +50,7 @@ define(function(require, exports, module) {
                     return;
     
                 var state = menu.childNodes.filter(function(node){
-                    return node.localName == "item";
+                    return node.localName == "item" && typeof node.value == "object";
                 }).map(function(node){
                     return node.value;
                 });
@@ -89,7 +90,7 @@ define(function(require, exports, module) {
             }
             else {
                 menu.insertBefore(new ui.item({
-                    caption : state.title,
+                    caption : state.document.title,
                     value   : state,
                     onclick : function(){
                         tabManager.open(state, function(){});
