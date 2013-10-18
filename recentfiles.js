@@ -93,6 +93,7 @@ define(function(require, exports, module) {
                     caption : state.document.title,
                     value   : state,
                     onclick : function(){
+                        state.active = true;
                         tabManager.open(state, function(){});
                     }
                 }), menu.firstChild);
