@@ -84,7 +84,7 @@ define(function(require, exports, module) {
         }
         
         function add(state) {
-            var item = search(state.path)
+            var item = search(state.path);
             if (item) {
                 menu.insertBefore(item, menu.firstChild);
             }
@@ -95,6 +95,7 @@ define(function(require, exports, module) {
                     onclick : function(){
                         state.active = true;
                         tabManager.open(state, function(){});
+                        this.parentNode.removeChild(this);
                     }
                 }), menu.firstChild);
             }
