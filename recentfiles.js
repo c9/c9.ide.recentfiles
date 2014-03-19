@@ -24,7 +24,7 @@ define(function(require, exports, module) {
             if (loaded) return false;
             loaded = true;
             
-            menu    = menus.addItemByPath("File/Open Recent/", null, 600, plugin),
+            menu    = menus.addItemByPath("File/Open Recent/", null, 500, plugin),
             divider = menus.addItemByPath("File/Open Recent/~", new ui.divider(), 1000000, plugin);
 
             menus.addItemByPath("File/Open Recent/Clear Menu", new ui.item({
