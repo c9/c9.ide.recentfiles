@@ -6,16 +6,16 @@ define(function(require, exports, module) {
     return main;
 
     function main(options, imports, register) {
-        var Plugin     = imports.Plugin;
-        var ui         = imports.ui;
-        var menus      = imports.menus;
-        var settings   = imports.settings;
+        var Plugin = imports.Plugin;
+        var ui = imports.ui;
+        var menus = imports.menus;
+        var settings = imports.settings;
         var tabManager = imports.tabManager;
         
         /***** Initialization *****/
         
         var plugin = new Plugin("Ajax.org", main.consumes);
-        // var emit   = plugin.getEmitter();
+        // var emit = plugin.getEmitter();
         
         var changed, menu, divider;
         
@@ -24,18 +24,18 @@ define(function(require, exports, module) {
             if (loaded) return false;
             loaded = true;
             
-            menu    = menus.addItemByPath("File/Open Recent/", null, 500, plugin),
+            menu = menus.addItemByPath("File/Open Recent/", null, 500, plugin),
             divider = menus.addItemByPath("File/Open Recent/~", new ui.divider(), 1000000, plugin);
 
             menus.addItemByPath("File/Open Recent/Clear Menu", new ui.item({
-                onclick : function(){
+                onclick: function(){
                     clearMenu();
                 }
             }), 2000000, plugin);
             
             // Settings
             
-            settings.on("read", function(e){
+            settings.on("read", function(e) {
                 clearMenu();
     
                 var state = settings.getJson("state/recentfiles") || [];
@@ -45,13 +45,13 @@ define(function(require, exports, module) {
                 }
             }, plugin);
     
-            settings.on("write", function(e){
+            settings.on("write", function(e) {
                 if (!changed)
                     return;
     
-                var state = menu.childNodes.filter(function(node){
+                var state = menu.childNodes.filter(function(node) {
                     return node.localName == "item" && typeof node.value == "object";
-                }).map(function(node){
+                }).map(function(node) {
                     return node.value;
                 });
                 
@@ -60,7 +60,7 @@ define(function(require, exports, module) {
             
             // Hooks
             
-            tabManager.on("tabDestroy", function(e){
+            tabManager.on("tabDestroy", function(e) {
                 if (!e.tab.path || e.tab.document.meta.newfile)
                     return;
     
@@ -71,9 +71,9 @@ define(function(require, exports, module) {
         
         /***** Methods *****/
         
-        function search(path){
+        function search(path) {
             var found = false;
-            menu.childNodes.every(function(item){
+            menu.childNodes.every(function(item) {
                 if (item.value && item.value.path == path) {
                     found = item;
                     return false;
@@ -90,9 +90,9 @@ define(function(require, exports, module) {
             }
             else {
                 menu.insertBefore(new ui.item({
-                    caption : state.document.title,
-                    value   : state,
-                    onclick : function(){
+                    caption: state.document.title,
+                    value: state,
+                    onclick: function(){
                         state.active = true;
                         tabManager.open(state, function(){});
                         this.parentNode.removeChild(this);
