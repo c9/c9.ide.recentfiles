@@ -122,7 +122,8 @@ define(function(require, exports, module) {
                     nodes[0].destroy(true, true);
                 else break;
             }
-            menu.selectNodes("item")[0].disable();
+            var item = menu.selectNodes("item")[0];
+            item && item.disable();
         }
         
         /***** Lifecycle *****/
