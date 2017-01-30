@@ -30,7 +30,7 @@ define(function(require, exports, module) {
             menus.addItemByPath("File/Open Recent/~", divider, 1000000, plugin);
 
             menus.addItemByPath("File/Open Recent/Clear Menu", new ui.item({
-                onclick: function(){
+                onclick: function() {
                     clearMenu();
                 }
             }), 2000000, plugin);
@@ -94,9 +94,9 @@ define(function(require, exports, module) {
                 menu.insertBefore(new ui.item({
                     caption: state.document.title,
                     value: state,
-                    onclick: function(){
+                    onclick: function() {
                         state.active = true;
-                        tabManager.open(state, function(){});
+                        tabManager.open(state, function() {});
                         this.parentNode.removeChild(this);
                     }
                 }), menu.firstChild);
@@ -115,7 +115,7 @@ define(function(require, exports, module) {
             changed = true;
         }
     
-        function clearMenu(){
+        function clearMenu() {
             var nodes = menu.childNodes;
             for (var i = nodes.length - 1; i >= 0; i--) {
                 if (nodes[0].localName == "item")
